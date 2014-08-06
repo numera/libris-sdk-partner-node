@@ -30,6 +30,15 @@ app.get('/libris_sdk/proof', function(req, res) {
   res.json(result);
 });
 
+//available for authorized and non-authorized requests.
+app.get('/libris-sdk/proof', function(req, res) {
+  var result = {
+    'the proof': 'is in the pudding'
+  };
+  res.json(result);
+});
+
+
 //Heroku dynamically assigns your app a port, so you can't set the port to a fixed number. 
 //Heroku adds the port to the env, so you can pull it from there. 
 var local_port = config.get('server-port');
