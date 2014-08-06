@@ -30,14 +30,13 @@ app.get('/libris_sdk/proof', function(req, res) {
   res.json(result);
 });
 
+//Heroku dynamically assigns your app a port, so you can't set the port to a fixed number. 
+//Heroku adds the port to the env, so you can pull it from there. 
+var local_port = config.get('server-port');
+var port = Number(process.env.PORT || local_port);
 
-var ports = config.get('server-ports');
-logger.info("Server listening on ports %s", ports);
+logger.info("Server listening locally on ports %s", port);
 
-for (var i = ports.length - 1; i >= 0; i--) {
-  var port = ports[i];
-  logger.debug("start listening on port", port);
-  app.listen(port, function() {
-    logger.debug("Listening on " + port);
-  });
-}
+app.listen(port, function() {
+  console.log("Listening on " + port);
+});
