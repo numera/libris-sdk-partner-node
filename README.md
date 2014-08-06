@@ -5,7 +5,7 @@ Reference implementation of the libris-sdk partner api in node.js
 
 
 ## Test
-- `foreman start`; foreman is part of the heroku toolbelt installation. It will pick up the command from the ./Profile
+- `foreman start`; foreman is part of the heroku toolbelt installation. It will pick up the command from the ./Procfile
 
 ## Deployment 
 -  commit changes into the git master repository
