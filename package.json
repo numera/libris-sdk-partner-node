@@ -1,0 +1,28 @@
+{
+  "name": "libris-sdk-partner-node",
+  "version": "0.0.1",
+  "description": "reference implmentation for partner using the libris-sdk",
+  "main": "index.js",
+  "scripts": {
+    "test": "karma"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/numera/libris-sdk-partner-node.git"
+  },
+  "keywords": [
+    "libris-sdk",
+    "numera"
+  ],
+  "author": "M.Ensing",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/numera/libris-sdk-partner-node/issues"
+  },
+  "homepage": "https://github.com/numera/libris-sdk-partner-node",
+  "dependencies": {
+    "log4js": "^0.6.16",
+    "express": "^4.8.0",
+    "nconf": "^0.6.9"
+  }
+}
