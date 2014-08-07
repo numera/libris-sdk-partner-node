@@ -23,6 +23,12 @@
   "dependencies": {
     "log4js": "^0.6.16",
     "express": "^4.8.0",
-    "nconf": "^0.6.9"
+    "nconf": "^0.6.9",
+    "grunt-cli": "^0.1.13",
+    "grunt": "^0.4.5",
+    "jit-grunt": "^0.8.0"
+  },
+  "devDependencies": {
+    "grunt-contrib-jshint": "^0.10.0"
   }
 }
