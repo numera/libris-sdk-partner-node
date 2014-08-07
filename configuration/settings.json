@@ -1,5 +1,5 @@
 {
-  "server-ports": [5000],
+  "server-port": [5000],
   "libris-sdk": {
     "url": "http://stage.bluelibris.com",
     "key": "key??"
@@ -10,11 +10,6 @@
     "replaceConsole": true,
     "appenders": [{
       "type": "console"
-    }, {
-      "type": "file",
-      "filename": "partner-server.log",
-      "maxLogSize": 20480,
-      "backups": 5
     }]
   }
 }

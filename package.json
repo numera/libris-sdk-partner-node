@@ -4,7 +4,8 @@
   "description": "reference implmentation for partner using the libris-sdk",
   "main": "index.js",
   "scripts": {
-    "test": "karma"
+    "test": "karma",
+    "postinstall": "echo calling npm;(cd client && npm install);echo calling bower;(cd client && ../node_modules/bower/bin/bower install)"
   },
   "repository": {
     "type": "git",
@@ -23,12 +24,16 @@
   "dependencies": {
     "log4js": "^0.6.16",
     "express": "^4.8.0",
-    "nconf": "^0.6.9",
     "grunt-cli": "^0.1.13",
     "grunt": "^0.4.5",
-    "jit-grunt": "^0.8.0"
+    "jit-grunt": "^0.8.0",
+    "grunt-hub": "^0.7.0",
+    "bower": "^1.3.9",
+    "nconf": "^0.6.9"
   },
   "devDependencies": {
-    "grunt-contrib-jshint": "^0.10.0"
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-concurrent": "^0.5.0",
+    "grunt-supervisor": "^0.2.4"
   }
 }

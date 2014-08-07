@@ -1,1 +1,1 @@
-web: node partner_server.js
+web: node server.js
