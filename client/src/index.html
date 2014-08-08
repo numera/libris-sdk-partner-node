@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html ng-app="AngularLibrisSdkPartner" ng-controller="AppController" ng-init="applicationInit()" lang="en">
+	<head>
+		<title ng-bind="pageTitle"></title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script id="libris-jssdk" type="text/javascript" src="<%= url_libris_sdk %>"></script>
+		<!-- font awesome from BootstrapCDN -->
+		<link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+		<!-- compiled CSS --><% styles.forEach( function ( file ) { %>
+		<link rel="stylesheet" type="text/css" href="<%= file %>" /><% }); %>		
+		<!-- compiled JavaScript --><% scripts.forEach( function ( file ) { %>
+		<script type="text/javascript" src="<%= file %>"></script><% }); %>
+	</head>
+	<body>
+		<h1>hi there 4</h1>
+
+		<div class="container-full full-height">
+			<div id="main-content" class="no-padding full-height">
+				<div ui-view="main" class="full-height">
+				</div>
+			</div>		
+		</div>
+	</body>
+</html>
