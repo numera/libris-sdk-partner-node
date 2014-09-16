@@ -12,10 +12,10 @@
 		<link rel="stylesheet" type="text/css" href="<%= file %>" /><% }); %>		
 		<!-- compiled JavaScript --><% scripts.forEach( function ( file ) { %>
 		<script type="text/javascript" src="<%= file %>"></script><% }); %>
+		<!--  <script src="https://google-code-prettify.googlecode.com/svn/loader/prettify.js"></script> -->
+		<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=desert"></script>
 	</head>
-	<body>
-		<h1>hi there.</h1>
-
+	<body>		
 		<div class="container-full full-height">
 			<div id="main-content" class="no-padding full-height">
 				<div ui-view="main" class="full-height">

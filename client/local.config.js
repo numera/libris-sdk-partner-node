@@ -5,14 +5,14 @@ module.exports = {
   bump: {
     options: {
       files: [
-        "package.json",
-        "bower.json"
+        'package.json',
+        'bower.json'
       ],
       commit: false,
       commitMessage: 'chore(release): v%VERSION%',
       commitFiles: [
-        "package.json",
-        "client/bower.json"
+        'package.json',
+        'client/bower.json'
       ],
       createTag: false, //note that we can only create the tag once, and because it is all in the same project, we only tag the bump on the root.
       tagName: 'v%VERSION%',
@@ -31,29 +31,26 @@ module.exports = {
    * nonetheless inside `src/`.
    */
   jshint: {
+    options: {
+      jshintrc: '<%= source_dir %>/.jshintrc'
+    },
     src: [
       '<%= app_files.js %>'
     ],
     config: [
       '<%= app_files.config %>'
     ],
-    test: [
-      '<%= app_files.jsunit %>'
-    ],
+    test: {
+      options: {
+        jshintrc: '<%= test_dir %>/.jshintrc'
+      },
+      files: {
+        src: '<%= app_files.jsunit %>'
+      }
+    },
     gruntfile: [
       'Gruntfile.js'
-    ],
-    options: {
-      curly: true,
-      immed: true,
-      newcap: true,
-      noarg: true,
-      sub: true,
-      boss: true,
-      eqnull: true,
-      node: true
-    },
-    globals: {}
+    ]
   },
 
 
@@ -93,9 +90,9 @@ module.exports = {
   /**
    * And for rapid development, we have a watch set up that checks to see if
    * any of the files listed below change, and then to execute the listed
-   * tasks when they do. This just saves us from having to type "grunt" into
+   * tasks when they do. This just saves us from having to type 'grunt' into
    * the command-line every time we want to see what we're working on; we can
-   * instead just leave "grunt watch" running in a background terminal. Set it
+   * instead just leave 'grunt watch' running in a background terminal. Set it
    * and forget it, as Ron Popeil used to tell us.
    *
    * But we don't need the same thing to happen for all the files.

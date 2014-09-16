@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = function(grunt) {
 
   require('jit-grunt')(grunt);
@@ -18,7 +20,7 @@ module.exports = function(grunt) {
      * We read in our `package.json` file so we can access the package name and
      * version. It's already there, so we don't repeat ourselves here.
      */
-    pkg: grunt.file.readJSON("package.json"),
+    pkg: grunt.file.readJSON('package.json'),
 
     /**
      * The banner is the comment that is placed at the top of our compiled
@@ -235,13 +237,22 @@ module.exports = function(grunt) {
   };
 
   if (process.env.NODE_ENV === 'production') {
-    //define a dummy jshint task so we can continue the build and compile on heroku
-    grunt.registerTask('jshint', function() {
-      grunt.log.writeln('skip jshint');
-    });
+
+    grunt.registerTask('build', [
+      'clean', 'html2js', 'less:build',
+      'concat:build_css', 'copy:build_app_assets', 'copy:build_vendor_assets',
+      'copy:build_appjs', 'copy:build_vendorjs', 'index:build'
+    ]);
     grunt.initConfig(grunt.util._.extend(taskConfig, userConfig));
   } else {
     var localConfig = require('./local.config.js');
+
+    grunt.registerTask('build', [
+      'clean', 'html2js', 'jshint', 'less:build',
+      'concat:build_css', 'copy:build_app_assets', 'copy:build_vendor_assets',
+      'copy:build_appjs', 'copy:build_vendorjs', 'index:build',
+      'karmaconfig', 'karma:continuous'
+    ]);
     grunt.initConfig(grunt.util._.extend(taskConfig, localConfig, userConfig));
   }
 
@@ -263,11 +274,7 @@ module.exports = function(grunt) {
   /**
    * The `build` task gets your app ready to run for development
    */
-  grunt.registerTask('build', [
-    'clean', 'html2js', 'jshint', 'less:build',
-    'concat:build_css', 'copy:build_app_assets', 'copy:build_vendor_assets',
-    'copy:build_appjs', 'copy:build_vendorjs', 'index:build'
-  ]);
+
 
   /**
    * The `test` task starts testing your app
@@ -316,20 +323,21 @@ module.exports = function(grunt) {
       return file.replace(dirRE, '');
     });
 
-    url_libris_sdk = grunt.option('url_libris_sdk') || process.env.URL_LIBRIS_SDK;
+    var url_libris_sdk = grunt.option('url_libris_sdk') || process.env.URL_LIBRIS_SDK;
     if (!url_libris_sdk) {
-      grunt.log.writeln("using default sdk environment ");
-      url_libris_sdk = "//na.bluelibris.com/static/js/libris-sdk.js";
+      grunt.log.writeln('using default sdk environment ');
+      url_libris_sdk = '//na.bluelibris.com/static/js/libris-sdk.js';
     }
-    grunt.log.writeln("sdk environment " + url_libris_sdk);
+    grunt.log.writeln('sdk environment ' + url_libris_sdk);
 
     grunt.file.copy('src/index.html', this.data.dir + '/index.html', {
-      process: function(contents, path) {
+      process: function(contents) {
         return grunt.template.process(contents, {
           data: {
             scripts: jsFiles,
             styles: cssFiles,
-            version: grunt.config('pkg.version')
+            version: grunt.config('pkg.version'),
+            url_libris_sdk: url_libris_sdk
           }
         });
       }
@@ -345,7 +353,7 @@ module.exports = function(grunt) {
     var jsFiles = filterForJS(this.filesSrc);
 
     grunt.file.copy('karma/karma-unit.tpl.js', grunt.config('build_dir') + '/karma-unit.js', {
-      process: function(contents, path) {
+      process: function(contents) {
         return grunt.template.process(contents, {
           data: {
             scripts: jsFiles

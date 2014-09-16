@@ -1,3 +1,5 @@
+'use strict';
+
 describe('AppController', function() {
 
   var AppCtrl, $location, $scope;

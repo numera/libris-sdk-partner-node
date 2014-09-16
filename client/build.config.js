@@ -7,6 +7,8 @@ module.exports = {
    * development and the `compile_dir` folder is where our app resides once it's
    * completely built.
    */
+  source_dir: 'src',
+  test_dir: 'tests',
   build_dir: 'build',
   compile_dir: 'bin',
 
@@ -20,8 +22,8 @@ module.exports = {
    * app's unit tests.
    */
   app_files: {
-    js: ['src/**/*.js', '!src/**/*.spec.js', '!src/assets/**/*.js'],
-    jsunit: ['src/**/*.spec.js'],
+    js: ['src/**/*.js', '!src/assets/**/*.js'],
+    jsunit: ['tests/**/*.spec.js'],
 
     config: ['src/configurations/**/*.json'],
 

@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = function(grunt) {
 
   require('jit-grunt')(grunt);
@@ -45,17 +47,17 @@ module.exports = function(grunt) {
       },
       supervisor: {
         target: {
-          script: "server.js",
+          script: 'server.js',
           options: {
-            watch: [".,configuration,routes"],
-            ignore: ["node_modules"],
+            watch: ['.,configuration,routes'],
+            ignore: ['node_modules'],
             pollInterval: 500,
-            extensions: ["js,json"],
-            exec: "node",
+            extensions: ['js,json'],
+            exec: 'node',
             debug: false,
             debugBrk: false,
             harmony: false,
-            noRestartOn: "error",
+            noRestartOn: 'error',
             //forceWatch: true,
             quiet: false
           }

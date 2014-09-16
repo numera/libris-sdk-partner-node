@@ -10,7 +10,8 @@ module.exports = function(config) {
      */
     files: [ <% scripts.forEach(function(file) { %> '<%= file %>', <%
       }); %>
-      'src/**/*.js'
+      'src/**/*.js',
+      'tests/**/*.js'
     ],
     exclude: [
       'src/assets/**/*.js'

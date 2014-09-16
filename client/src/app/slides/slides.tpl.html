@@ -1,0 +1,63 @@
+<h1>Getting started with the Libris SDK</h1>
+
+Welcome.....
+
+<h2>-</h2>
+
+You should have receveived an application id and a private key.
+
+With these two ingredients we can compute a token that we need to initialize the LibrisAPI.
+
+<div>
+<form name="formData">
+
+  ApplicationId: 
+  <input name="appId" type="text" ng-model="applicationId" placeholder='your-application-id' autocomplete="off"/> <br/>
+  Your secret: 
+  <input name="appSecret" type='password' ng-model="applicationSecret" placeholder='your-key' autocomplete="off"/>  <br/>
+  Nonce:
+  <input name="appNonce" type="number" ng-model="demoNonce" placeholder='miliseconds sinds 1/1/1970'/>
+  
+</form>
+*(this is just for demonstration purposes, the key should always remain on your server and should never be send over the wire) <br/>
+
+
+<button  ng-click="runCode();">run</button> 
+
+
+</div>
+<br/>
+
+
+<h2>Javascript</h2>
+Example server side implementation  Node with Express.
+
+<pre ng-class="{prettyprint : !running}"  style="display: block;background-color: #333;">
+
+   var crypto = require('crypto');
+
+   var compute_signature = function(message) {    	
+  	var hmac = crypto.createHmac('sha256', '<input type='password' ng-model="applicationSecret" placeholder='your-key' autocomplete="off"/>');
+  	hmac.update(message);
+  	return hmac.digest('base64');
+   };
+    
+    app.post('/libris_sdk/proof', function(req, res) {
+        //your code does not retrieve anything from the requst. appId and secret must be stored on the server side.
+        var nonce = Math.floor(new Date().getTime() / 1000); 
+        nonce =  <input ng-model="demoNonce" placeholder='miliseconds sinds 1/1/1970'/>
+        var appId = '<input ng-model="applicationId" placeholder='your-application-id' autocomplete="off"/>';
+        var to_sign = appId + nonce; <span ng-show="running"  class="com">//={{applicationId}}{{demoNonce}}</span>    
+        var proof = compute_signature(to_sign); <span ng-show="running" class="com">//= {{demoProof}}</span>
+        res.json(proof);
+    };
+
+</pre>
+
+
+<h2>C#</h2>
+run on server ...
+
+<pre ng-class="{prettyprint : !running}"  style="display: block;background-color: #333;">
+   ...
+</pre>
