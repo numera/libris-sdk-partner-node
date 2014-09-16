@@ -1,3 +1,4 @@
+<div class="container">
 <h1>Getting started with the Libris SDK</h1>
 
 Welcome.....
@@ -8,34 +9,36 @@ You should have receveived an application id and a private key.
 
 With these two ingredients we can compute a token that we need to initialize the LibrisAPI.
 
-<div>
+
 <form name="formData">
 
   ApplicationId: 
   <input name="appId" type="text" ng-model="applicationId" placeholder='your-application-id' autocomplete="off"/> <br/>
-  Your secret: 
+  Your secret: **
   <input name="appSecret" type='password' ng-model="applicationSecret" placeholder='your-key' autocomplete="off"/>  <br/>
   Nonce:
   <input name="appNonce" type="number" ng-model="demoNonce" placeholder='miliseconds sinds 1/1/1970'/>
   
 </form>
-*(this is just for demonstration purposes, the key should always remain on your server and should never be send over the wire) <br/>
+
+<alert type="danger">**This is just for demonstration purposes, the key should always remain on your server and should never be send over the wire!</alert>
 
 
-<button  ng-click="runCode();">run</button> 
+<button  class="btn btn-primary" ng-click="runCode();">Run simulation code</button> 
+
+<br/><br/>
 
 
-</div>
-<br/>
+<tabset>
+<tab heading="Javascript">
 
+  Example server side implementation  Node with Express.
 
-<h2>Javascript</h2>
-Example server side implementation  Node with Express.
-
-<!-- style="display: block;background-color: #333;" -->
 <pre class="lang-js"  ng-class="{prettyprint: !running}">
-
+   var express = require('express');
    var crypto = require('crypto');
+
+   var app = express();
 
    var compute_signature = function(message) {    	
   	var hmac = crypto.createHmac('sha256', '<input type='password' ng-model="applicationSecret" placeholder='your-key' autocomplete="off"/>');
@@ -45,8 +48,7 @@ Example server side implementation  Node with Express.
     
     app.post('/libris_sdk/proof', function(req, res) {
         //your code does not retrieve anything from the requst. appId and secret must be stored on the server side.
-        var nonce = Math.floor(new Date().getTime() / 1000); 
-        nonce =  <input ng-model="demoNonce" placeholder='miliseconds sinds 1/1/1970'/>
+        var nonce = Math.floor(new Date().getTime() / 1000); //=  {{demoNonce}}        
         var appId = '<input ng-model="applicationId" placeholder='your-application-id' autocomplete="off"/>';
         var to_sign = appId + nonce; <span ng-show="running"  class="com">//={{applicationId}}{{demoNonce}}</span>    
         var proof = compute_signature(to_sign); <span ng-show="running" class="com">//= {{demoProof}}</span>
@@ -55,10 +57,24 @@ Example server side implementation  Node with Express.
 
 </pre>
 
+</tab>
+<tab heading="C#">
 
-<h2>C#</h2>
-run on server ...
+Example server side implementation C#
 
-<pre ng-class="{prettyprint : !running}"  style="display: block;background-color: #333;">
-   ...
+<pre class="lang-cs"  ng-class="{prettyprint: !running}">
+
+   var epochTimespan = DateTime.UtcNow - new DateTimeOffset(1970, 1 ,1, 0,0,0, TimeSpan.Zero); 
+   var nonce = Convert.ToInt64(epochTimespan.TotalSeconds); //=  {{demoNonce}}
+   var appId = '<input ng-model="applicationId" placeholder='your-application-id' autocomplete="off"/>';
+   string to_sign = appId + nonce;  <span ng-show="running"  class="com">//={{applicationId}}{{demoNonce}}</span>    
+   string proof = Convert.ToBase64String(new System.Security.Cryptography.HMACSHA256(
+                             Encoding.ASCII.GetBytes(<input type='password' ng-model="applicationSecret" placeholder='your-key' autocomplete="off"/>))
+                             .ComputeHash(Encoding.ASCII.GetBytes(toSign))); 
+   <span ng-show="running" class="com">//= {{demoProof}}</span>
+
 </pre>
+
+</tab>
+</tabset>
+</div>

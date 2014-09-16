@@ -1,7 +1,7 @@
 'use strict';
 /* global prettyPrint */
 angular.module('AngularLibrisSdkPartner.slides', [
-  'ui.router'
+
 ])
 
 .config(function config($stateProvider) {
