@@ -1,5 +1,5 @@
 'use strict';
-
+/* global prettyPrint */
 angular.module('AngularLibrisSdkPartner.slides', [
   'ui.router'
 ])
@@ -20,19 +20,23 @@ angular.module('AngularLibrisSdkPartner.slides', [
     });
 })
 
-.controller('SlidesCtrl', function($log, $scope, $http) {
+.controller('SlidesCtrl', function($log, $scope, $http, $timeout) {
   $log.debug('started');
 
-  $scope.applicationId = 'your-application-id';
+  $scope.applicationId = 'your-application-id-2';
   $scope.applicationSecret = 'your-secret';
   $scope.demoNonce = Math.floor(new Date().getTime() / 1000);
-  $scope.running = false;
 
-  prettyPrint();
+  $timeout(function() {
+    try {
+      prettyPrint();
+    } catch (error) {
+      $log.error('failed ', error);
+    }
+  }, 100);
 
   $scope.runCode = function() {
     $scope.running = true;
-
     $log.debug('application id=', $scope.applicationId);
     var toSignValue = $scope.applicationId + '' + $scope.demoNonce;
     $log.debug(toSignValue);

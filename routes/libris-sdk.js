@@ -11,6 +11,8 @@ module.exports = function(app) {
     res.send('you should not see this, the index.html page is served as a static route');
   });
 
+
+
   //available for authorized and non-authorized requests.
   app.get('/libris-sdk/proof', function(req, res) {
     var result = {

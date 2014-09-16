@@ -13,15 +13,15 @@ angular.module('AngularLibrisSdkPartner', [
   $urlRouterProvider.otherwise('/slides');
 })
 
-.directive('prettyprint', function($log) {
-  return {
-    restrict: 'C',
-    link: function postLink(scope, element) {
-      $log.debug(element.html());
-      //element.html(prettyPrintOne(element.html(), '', true));
-    }
-  };
-})
+// .directive('prettyprint', function($log) {
+//   return {
+//     restrict: 'C',
+//     link: function postLink(scope, element) {
+//       $log.debug(element.html());
+//       //element.html(prettyPrintOne(element.html(), '', true));
+//     }
+//   };
+// })
 
 .controller('AppController', function AppCtrl($log, $rootScope, $scope) {
   $log.info('Angular App controller initialized');
