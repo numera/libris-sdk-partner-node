@@ -13,8 +13,7 @@
     "grunt-contrib-concat": "^0.5.0",
     "grunt-contrib-less": "^0.11.4",
     "grunt-contrib-uglify": "^0.5.1",
-    "grunt-ngmin": "0.0.3",
-    "angular-showoff": "https://github.com/tchatel/angular-showoff.git"
+    "grunt-ngmin": "0.0.3"
   },
   "devDependencies": {
     "grunt-bump": "0.0.15",
