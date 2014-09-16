@@ -1,6 +1,11 @@
+'use strict';
+
+var log4js = require('log4js');
+var logger = log4js.getLogger('routes/call-center');
+
 //very basic http authentication. Only to be used under https (and local intranet)
 function isAuthorized(req, res, next) {
-  logger.trace("check is authenticated");
+  logger.trace('check is authenticated');
 
   var auth = req.headers['authorization'];
   if (!auth) {
@@ -15,7 +20,7 @@ function isAuthorized(req, res, next) {
     var buf = new Buffer(tmp[1], 'base64'); // create a buffer and tell it the data coming in is base64
     var plain_auth = buf.toString(); // read it back out as a string
 
-    logger.trace("Decoded Authorization ", plain_auth);
+    logger.trace('Decoded Authorization ', plain_auth);
 
     // At this point plain_auth = "username:password"
 
