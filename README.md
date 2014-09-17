@@ -21,8 +21,7 @@ Install heroku toolbelt
 - `heroku open`; open the browser
 
 
-
+ heroku config:set URL_LIBRIS_SDK="//stage.bluelibris.com/static/js/libris-sdk.js"
  heroku config:set LIBRIS_APP_KEY="f45b4abebfed8066804b11a2ac8c7117"
-
  heroku config:set LIBRIS_APP_ID="libris-contoso"
 

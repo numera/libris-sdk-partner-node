@@ -327,6 +327,8 @@ module.exports = function(grunt) {
       return file.replace(dirRE, '');
     });
 
+    //export URL_LIBRIS_SDK=//stage.bluelibris.com/static/js/libris-sdk.js
+
     var url_libris_sdk = grunt.option('url_libris_sdk') || process.env.URL_LIBRIS_SDK;
     if (!url_libris_sdk) {
       grunt.log.writeln('using default sdk environment ');
