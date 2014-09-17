@@ -1,0 +1,42 @@
+
+<h1>Initializing the API</h1>
+
+<button  class="btn btn-primary" ng-click="runCode();">Initialize Libris_API</button> <br/>
+
+With the computed proof generated in prevous step we can initialize the Libris API.
+
+<pre class="lang-js"  ng-class="{prettyprint: !running}">
+ &lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;My Libris-SDK integration&lt;/title&gt;    
+    &lt;script id=&quot;libris-jssdk&quot; type=&quot;text/javascript&quot; src=&quot;https://stage.bluelibris.com/static/js/libris-sdk.js&quot;&gt;&lt;/script&gt;
+    &lt;script  type=&quot;text/javascript&quot;&gt;
+      var initializeApi = function(){
+        LibrisAPI.init({
+          &quot;application_id&quot;: &quot;{{app.id}}&quot;,
+          &quot;nonce&quot;: &quot;{{app.nonce}}&quot;,
+          &quot;proof&quot;: &quot;{{app.proof}}&quot;,
+          &quot;debug&quot;: true,          
+          &quot;jsonp_timeout&quot;: 5000,
+          &quot;postback&quot;: &quot;your_postback_url&quot;,          
+          }, function(d) {
+            console.log(d);
+          }
+        }
+    &lt;/script&gt;
+    ...
+  &lt;/head&gt;
+  &lt;body onLoad=&quot;initializeAPI();&quot;&gt;
+
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+Console response:
+<pre >
+{{apiResponse | json}}
+
+</pre>
+
+
+

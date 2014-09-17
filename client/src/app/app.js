@@ -10,7 +10,7 @@ angular.module('AngularLibrisSdkPartner', [
 .config(function($urlRouterProvider, $logProvider) {
   $logProvider.debugEnabled(true);
 
-  $urlRouterProvider.otherwise('/slides');
+  $urlRouterProvider.otherwise('/gettingStarted');
 })
 
 // .directive('prettyprint', function($log) {
@@ -27,6 +27,7 @@ angular.module('AngularLibrisSdkPartner', [
   $log.info('Angular App controller initialized');
 
   $scope.applicationInit = function() {
-    $log.debug('Initializing application');
+    $log.debug('Initializing application control');
+
   };
 });

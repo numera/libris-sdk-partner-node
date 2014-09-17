@@ -22,4 +22,7 @@ Install heroku toolbelt
 
 
 
+ heroku config:set LIBRIS_APP_KEY="f45b4abebfed8066804b11a2ac8c7117"
+
+ heroku config:set LIBRIS_APP_ID="libris-contoso"
 

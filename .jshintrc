@@ -23,6 +23,7 @@
   "globals": {
     "angular": false,
     "LibrisAPI": false,
-    "debugger":false
+    "debugger":false,
+    "process": false
   }
 }
