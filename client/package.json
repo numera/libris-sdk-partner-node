@@ -1,6 +1,6 @@
 {
   "name": "angular-libris-sdk-partner",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "angular client implementation for the libris-sdk partner site",
   "main": "Gruntfile.js",
   "private": true,
@@ -20,6 +20,7 @@
     "grunt-contrib-jshint": "^0.10.0",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-karma": "^0.8.3",
+    "grunt-ng-constant": "^1.0.0",
     "karma": "^0.12.21",
     "karma-chrome-launcher": "^0.1.4",
     "karma-firefox-launcher": "^0.1.3",

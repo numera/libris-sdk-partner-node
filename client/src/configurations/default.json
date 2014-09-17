@@ -1,0 +1,8 @@
+{
+  "Name": "Heroku",
+  "ANGULAR_DEBUG": true,
+  "LIBRIS_SDK_DEBUG": true,
+  "URL_LIBRIS_SDK": "",
+  "SDK_APP_ID": "",
+  "SDK_APP_SECRET": ""
+}

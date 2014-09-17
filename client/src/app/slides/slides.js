@@ -1,6 +1,6 @@
 'use strict';
 /* global prettyPrint */
-angular.module('AngularLibrisSdkPartner.slides', [
+angular.module('AngularLibrisSdkPartner.Slides', [
 
 ])
 
@@ -27,15 +27,14 @@ angular.module('AngularLibrisSdkPartner.slides', [
       },
       data: {
         pageTitle: 'Getting Started',
-        next: 'slide.createToken',
-        previous: 'slide.gettingStarted'
+        next: 'slide.createToken'
       }
     })
     .state('slide.createToken', {
       url: '/createToken',
       views: {
         'slide': {
-          controller: 'SlideInitCtrl',
+          controller: 'SlideCreateTokenCtrl',
           templateUrl: 'slides/slides.tpl.html'
         }
       },
@@ -55,7 +54,6 @@ angular.module('AngularLibrisSdkPartner.slides', [
       },
       data: {
         pageTitle: 'Initializing API',
-        next: 'slide.init',
         previous: 'slide.createToken'
       }
     });
@@ -70,50 +68,39 @@ angular.module('AngularLibrisSdkPartner.slides', [
   };
 })
 
-.controller('SlidesCtrl', function($log, $scope, $http, $timeout, $state, AppSettings) {
+.controller('SlidesCtrl', function($log, $scope, $http, $timeout, $state, AppSettings, CONSTANTS) {
   $log.debug('started');
 
   $scope.app = AppSettings;
-  $scope.app.id = process.env.get('SDK_APP_ID');
-  $scope.app.secret = process.env.get('SDK_APP_SECRET');
+  $scope.app.id = CONSTANTS.SDK_APP_ID;
+  $scope.app.secret = CONSTANTS.SDK_APP_SECRET;
 
   $scope.previousSlide = function() {
-    $log.debug('going previous');
     $state.go($state.current.data.previous);
   };
 
+  $scope.hasPrevious = function() {
+    return ($state.current.data.previous && $state.current.data.previous.length > 0);
+  };
+
+  $scope.hasNext = function() {
+    return ($state.current.data.next && $state.current.data.next.length > 0);
+  };
+
   $scope.nextSlide = function() {
-    $log.debug('going next');
     $state.go($state.current.data.next);
   };
 
-
-
-  $timeout(function() {
-    try {
-      prettyPrint();
-    } catch (error) {
-      $log.error('failed ', error);
-    }
-  }, 1000);
 })
 
-.controller('SlideInitCtrl', function($log, $scope, $http, $timeout) {
+.controller('SlideCreateTokenCtrl', function($log, $scope, $http) {
   $log.debug('started');
 
-
-  $timeout(function() {
-    try {
-      prettyPrint();
-    } catch (error) {
-      $log.error('failed ', error);
-    }
-  }, 100);
+  $scope.app.nonce = Math.floor(new Date().getTime() / 1000);
 
   $scope.runCode = function() {
-    $scope.running = true;
     $log.debug('application id=', $scope.app.id);
-    $scope.app.nonce = Math.floor(new Date().getTime() / 1000);
+
     var toSignValue = $scope.app.id + '' + $scope.app.nonce;
     $log.debug(toSignValue);
     $http({

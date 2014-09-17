@@ -2,7 +2,9 @@
 
 module.exports = function(grunt) {
 
-  require('jit-grunt')(grunt);
+  require('jit-grunt')(grunt, {
+    'ngconstant': 'grunt-ng-constant'
+  });
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   /**
@@ -76,7 +78,10 @@ module.exports = function(grunt) {
       },
       build_vendorjs: {
         files: [{
-          src: ['<%= vendor_files.js %>'],
+          src: [
+            '<%= vendor_files.js %>',
+            '<%= vendor_files.css %>',
+          ],
           dest: '<%= build_dir %>',
           cwd: '.',
           expand: true
@@ -120,6 +125,7 @@ module.exports = function(grunt) {
           'module.prefix',
           '<%= build_dir %>/src/**/*.js',
           '<%= html2js.app.dest %>',
+          '<%= build_dir %>/configuration.js',
           'module.suffix'
         ],
         dest: '<%= compile_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.js'
@@ -197,6 +203,27 @@ module.exports = function(grunt) {
       }
     },
 
+    ngconstant: {
+      options: {
+        space: '  ',
+        dest: '<%= build_dir %>/configuration.js',
+        name: 'AngularLibrisSdkPartnerConfig',
+        constants: {
+          CONSTANTS: grunt.file.readJSON('src/configurations/default.json')
+        }
+      },
+      // // targets
+      override: {
+        values: {
+          SDK_APP_ID: process.env.SDK_APP_ID,
+          SDK_APP_SECRET: process.env.SDK_APP_SECRET
+        }
+      }
+      //   constants: {
+      //     CONSTANTS: grunt.file.readJSON('src/configurations/' + environment + '/configuration_override.json')
+      //   }
+    },
+
     /**
      * The `index` task compiles the `index.html` file as a Grunt template. CSS
      * and JS files co-exist here but they get split apart later.
@@ -215,6 +242,7 @@ module.exports = function(grunt) {
           '<%= vendor_files.js %>',
           '<%= build_dir %>/src/**/*.js',
           '<%= html2js.app.dest %>',
+          '<%= build_dir %>/configuration.js',
           '<%= vendor_files.css %>',
           '<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css'
         ]
@@ -241,7 +269,7 @@ module.exports = function(grunt) {
     grunt.initConfig(grunt.util._.extend(taskConfig, userConfig));
 
     grunt.registerTask('build', [
-      'clean', 'html2js', 'less:build',
+      'clean', 'ngconstant:override', 'html2js', 'less:build',
       'concat:build_css', 'copy:build_app_assets', 'copy:build_vendor_assets',
       'copy:build_appjs', 'copy:build_vendorjs', 'index:build'
     ]);
@@ -251,7 +279,7 @@ module.exports = function(grunt) {
     grunt.initConfig(grunt.util._.extend(taskConfig, localConfig, userConfig));
 
     grunt.registerTask('build', [
-      'clean', 'html2js', 'jshint', 'less:build',
+      'clean', 'ngconstant:override', 'html2js', 'jshint', 'less:build',
       'concat:build_css', 'copy:build_app_assets', 'copy:build_vendor_assets',
       'copy:build_appjs', 'copy:build_vendorjs', 'index:build',
       'karmaconfig', 'karma:continuous'

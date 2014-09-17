@@ -139,7 +139,7 @@ module.exports = {
       files: [
         '<%= app_files.config %>'
       ],
-      tasks: ['jshint:config', 'karma:unit:run', 'copy:build_appjs']
+      tasks: ['jshint:config', 'ngconstant:override', 'karma:unit:run', 'copy:build_appjs']
     },
 
 

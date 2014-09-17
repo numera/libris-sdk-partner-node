@@ -5,21 +5,14 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<!-- <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script> -->
 		
-		 <script type="text/javascript" src="/assets/prettify.js"></script>-
-
-		
-
 		<script id="libris-jssdk" type="text/javascript" src="<%= url_libris_sdk %>"></script>
 		<!-- font awesome from BootstrapCDN -->
 		<link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 		<!-- compiled CSS --><% styles.forEach( function ( file ) { %>
 		<link rel="stylesheet" type="text/css" href="<%= file %>" /><% }); %>		
 		<!-- compiled JavaScript --><% scripts.forEach( function ( file ) { %>
-		<script type="text/javascript" src="<%= file %>"></script><% }); %>
-		
-		<link href="/assets/prettify.css"  rel="stylesheet" type="text/css"/> 
+		<script type="text/javascript" src="<%= file %>"></script><% }); %>			
 		
 	</head>
 	<body>		

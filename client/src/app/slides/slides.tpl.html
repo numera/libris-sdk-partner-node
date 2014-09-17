@@ -1,73 +1,81 @@
 <h1>Generating a token</h1>
 
 To validate that your application is indeed the one we think it is, you have to give us some proof.
-This proof can be generated from your application id and the secret key that is only for you. 
-
-In the form below we show you how this can be done on your server. 
-
-<form name="formData">
-  Application Id: 
-  <input name="appId" type="text" ng-model="app.id" placeholder='your-application-id' autocomplete="off"/> <br/>
-  Your secret: **
-  <input name="appSecret" type='password' ng-model="app.secret" placeholder='your-key' autocomplete="off"/>  <br/>
-  Nonce:
-  <input name="appNonce" type="number" ng-model="app.nonce" placeholder='miliseconds sinds 1/1/1970'/>  
-</form>
-
-<alert type="danger">**This is just for demonstration purposes, the key should always remain on your server and should never be send over the wire!</alert>
+This proof can be generated from your application id and the secret key that is specific for your application. Never share this key with other people.
 
 
-<button  class="btn btn-primary" ng-click="runCode();">Compute Proof</button> 
+  <table class="table table-striped">
+    <tr>
+      <td>
+        Your Application Id
+      </td>
+      <td>
+        <input name="appId" type="text" ng-model="app.id" placeholder='your-application-id' autocomplete="off"/>
+      </td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>
+        Your Secret
+      </td>
+      <td>
+        <input name="appSecret" type='password' ng-model="app.secret" placeholder='your-key' autocomplete="off"/>  <br/>
+      </td>
+      <td><alert type="danger">This is just for demonstration purposes, the key should never be send over the wire!</alert></td>
+    </tr>
+    <tr>
+      <td>
+        Nonce
+      </td>
+      <td>
+        <input name="appNonce" type="number" ng-model="app.nonce" placeholder='miliseconds sinds 1/1/1970'/>
+      </td>
+      <td></td>
+    </tr>
+  </table>
+  
 
+<button  class="btn btn-primary" ng-click="runCode();">Compute Proof</button>
 <br/><br/>
-
 <tabset>
 <tab heading="Javascript">
-
 <h4>Example server side implementation  Node with Express.</h4>
-
-<pre class="lang-js"  ng-class="{prettyprint: !running}">
-
+<pre nag-prism class="language-javascript" watch="{{app}}">
+<code>
    var express = require('express');
    var crypto = require('crypto');
-
    var app = express();
-
-   var compute_signature = function(message) {    	
-  	var hmac = crypto.createHmac('sha256', '<input type='password' ng-model="app.secret" placeholder='your-key' autocomplete="off"/>');
-  	hmac.update(message);
-  	return hmac.digest('base64');
+   var compute_signature = function(message) {      
+    var hmac = crypto.createHmac('sha256', '{{app.secret | password }}');
+    hmac.update(message);
+    return hmac.digest('base64');
    };
     
     app.post('/libris_sdk/proof', function(req, res) {
         //your code does not retrieve anything from the requst. appId and secret must be stored on the server side.
         var nonce = Math.floor(new Date().getTime() / 1000); //=  {{app.nonce}}        
-        var appId = '<input ng-model="app.id" placeholder='your-appl-id' autocomplete="off"/>';
-        var to_sign = appId + nonce; <span ng-show="running"  class="com">//={{app.id}}{{app.nonce}}</span>    
-        var proof = compute_signature(to_sign); <span ng-show="running" class="com">//= {{app.proof}}</span>
+        var appId = '{{app.id}}';
+        var to_sign = appId + nonce; //={{app.id}}{{app.nonce}}
+        var proof = compute_signature(to_sign); //= {{app.proof}}
         res.json(proof);
     };
-
+</code>
 </pre>
-
 </tab>
 <tab heading="C#">
-
 <h4>Example server side implementation C#</h4>
-
-<pre class="lang-cs"  ng-class="{prettyprint: !running}">
-
+<pre nag-prism class="language-csharp" watch="{{app}}">
+<code>
    var epochTimespan = DateTime.UtcNow - new DateTimeOffset(1970, 1 ,1, 0,0,0, TimeSpan.Zero); 
    var nonce = Convert.ToInt64(epochTimespan.TotalSeconds); //=  {{app.nonce}}
-   var appId = '<input ng-model="your_app_id" placeholder='your-application-id' autocomplete="off"/>';
-   string to_sign = appId + nonce;  <span ng-show="running"  class="com">//={{app.id}}{{app.nonce}}</span>    
+   var appId = '{{app.id}}';
+   string to_sign = appId + nonce;  //={{app.id}}{{app.nonce}}
    string proof = Convert.ToBase64String(new System.Security.Cryptography.HMACSHA256(
-                             Encoding.ASCII.GetBytes(<input type='password' ng-model="app.secret" placeholder='your-key' autocomplete="off"/>))
+                             Encoding.ASCII.GetBytes({{app.secret | password}}))
                              .ComputeHash(Encoding.ASCII.GetBytes(toSign))); 
-   <span ng-show="running" class="com">//= {{app.proof}}</span>
-
+   //= {{app.proof}}
+</code>
 </pre>
-
 </tab>
 </tabset>
 </div>

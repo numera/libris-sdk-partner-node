@@ -8,7 +8,7 @@ var logger = log4js.getLogger('Static files');
 module.exports = function(app) {
   //temporary. 
   app.get('/', function(req, res) {
-    res.send('you should not see this, the index.html page is served as a static route');
+    res.send('you should not see this, the index.html page is served as a static route').end();
   });
 
   var computeSignature = function(key, message) {
@@ -19,8 +19,8 @@ module.exports = function(app) {
   };
 
   app.get('/libris-sdk/proof', function(req, res) {
-    var appId = process.env.LIBRIS_APP_ID;
-    var appKey = process.env.LIBRIS_APP_KEY;
+    var appId = process.env.SDK_APP_ID;
+    var appKey = process.env.SDK_APP_SECRET;
     logger.debug('AppId %s', appId);
     var nonce = Math.floor(new Date().getTime() / 1000);
     var toSign = appId + nonce;

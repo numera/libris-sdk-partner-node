@@ -6,4 +6,13 @@ We will go through some simple steps to get you started with the Libris_SDK.
 
 Do you have your application id and secret ready?
 
+<form name="formData">
+  Application Id: 
+  <input name="appId" type="text" ng-model="app.id" placeholder='your-application-id' autocomplete="off"/> <br/>
+  Your secret: **
+  <input name="appSecret" type='password' ng-model="app.secret" placeholder='your-key' autocomplete="off"/>  <br/>
+  Nonce:
+  <input name="appNonce" type="number" ng-model="app.nonce" placeholder='miliseconds sinds 1/1/1970'/>  
+</form>
+
 <button ng-click="nextSlide();" class="btn btn-large btn-primary">Here we go</button>

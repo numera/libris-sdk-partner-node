@@ -1,9 +1,7 @@
 
 <h1>Slides</h1>
 
-<button  ng-click="previousSlide();" class="btn btn-large btn-primary"><span class='fa fa-arrow-left'>&nbsp;</span>Back</button><button ng-click="nextSlide();" class="btn btn-large btn-primary pull-right">Next&nbsp;<span class='fa fa-arrow-right'></span></button>
-
-
-
+<button  ng-click="previousSlide();" ng-class="!hasPrevious() && 'disabled'" class="btn btn-sm "><span class='fa fa-arrow-left'>&nbsp;</span>Back</button>
+<button ng-click="nextSlide();" ng-class="!hasNext() && 'disabled'" class="btn btn-sm  pull-right">Next&nbsp;<span class='fa fa-arrow-right'></span></button>
 
 <div ui-view="slide"></div>

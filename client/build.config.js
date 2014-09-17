@@ -63,14 +63,16 @@ module.exports = {
    */
   vendor_files: {
     js: [
-      'vendor/angular/angular.min.js',
+      'vendor/angular/angular.js',
       'vendor/angular-bootstrap/ui-bootstrap.min.js',
       'vendor/angular-bootstrap/ui-bootstrap-tpls.min.js',
       'vendor/angular-ui-router/release/angular-ui-router.js',
-      'vendor/underscore/underscore-min.js'
-
+      'vendor/underscore/underscore-min.js',
+      'vendor/prism/prism.js'
     ],
-    css: [],
+    css: [
+      'vendor/prism/prism.css'
+    ],
     assets: [
       'vendor/bootstrap/img/*.png'
     ]
