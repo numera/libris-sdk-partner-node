@@ -63,8 +63,8 @@ angular.module('AngularLibrisSdkPartner.slides', [
 
 .factory('AppSettings', function() {
   return {
-    id: 'numera-dealer-portal',
-    secret: '0e4db77dc2e368c46e8735472381fa21',
+    id: 'libris-contoso',
+    secret: 'your-secret',
     proof: null,
     nonce: 0
   };
@@ -74,7 +74,8 @@ angular.module('AngularLibrisSdkPartner.slides', [
   $log.debug('started');
 
   $scope.app = AppSettings;
-
+  $scope.app.id = process.env.get('SDK_APP_ID');
+  $scope.app.secret = process.env.get('SDK_APP_SECRET');
 
   $scope.previousSlide = function() {
     $log.debug('going previous');
