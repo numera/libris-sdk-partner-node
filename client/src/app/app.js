@@ -84,7 +84,7 @@ angular.module('AngularLibrisSdkPartner', [
 
 .filter('password', function() {
   return function(input) {
-    return input.replace(/./gi, '*');
+    return input.replace(/./g, '*');
   };
 })
 

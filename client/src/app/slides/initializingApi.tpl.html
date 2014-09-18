@@ -5,38 +5,33 @@
 
 With the computed proof generated in prevous step we can initialize the Libris API.
 
-<pre class="lang-js"  ng-class="{prettyprint: !running}">
- &lt;html&gt;
-  &lt;head&gt;
-    &lt;title&gt;My Libris-SDK integration&lt;/title&gt;    
-    &lt;script id=&quot;libris-jssdk&quot; type=&quot;text/javascript&quot; src=&quot;https://stage.bluelibris.com/static/js/libris-sdk.js&quot;&gt;&lt;/script&gt;
-    &lt;script  type=&quot;text/javascript&quot;&gt;
+<pre nag-prism  class="language-markup" watch="{{app}}">
+<code>&lt;html>&lt;head>
+    &lt;title>My Libris-SDK integration&lt;/title>    
+    &lt;script id='libris-jssdk' type='text/javascript' src='https://stage.bluelibris.com/static/js/libris-sdk.js'>&lt;/script>
+    &lt;script  type='text/javascript'>
       var initializeApi = function(){
         LibrisAPI.init({
-          &quot;application_id&quot;: &quot;{{app.id}}&quot;,
-          &quot;nonce&quot;: &quot;{{app.nonce}}&quot;,
-          &quot;proof&quot;: &quot;{{app.proof}}&quot;,
-          &quot;debug&quot;: true,          
-          &quot;jsonp_timeout&quot;: 5000,
-          &quot;postback&quot;: &quot;your_postback_url&quot;,          
+          'application_id': '{{app.id}}',
+          'nonce': '{{app.nonce}}',
+          'proof': '{{app.proof}}',
+          'debug': true,          
+          'jsonp_timeout': 5000,
+          'postback': 'your_postback_url',          
           }, function(d) {
             console.log(d);
           }
         }
-    &lt;/script&gt;
-    ...
-  &lt;/head&gt;
-  &lt;body onLoad=&quot;initializeAPI();&quot;&gt;
-
-  &lt;/body&gt;
-&lt;/html&gt;
-</pre>
+    &lt;/script>
+&lt;/head>
+&lt;body onLoad='initializeAPI();'>
+&lt;/body>
+&lt;/html>
+</code></pre>
 
 Console response:
-<pre >
-{{apiResponse | json}}
+<pre nag-prism class="language-javascript" source="{{apiResponse|json}}" watch="{{app}}">
 
+</code>
 </pre>
-
-
 
