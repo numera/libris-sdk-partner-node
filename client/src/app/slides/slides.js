@@ -1,5 +1,5 @@
 'use strict';
-/* global prettyPrint */
+
 angular.module('AngularLibrisSdkPartner.Slides', [
 
 ])
@@ -122,18 +122,10 @@ angular.module('AngularLibrisSdkPartner.Slides', [
   };
 })
 
-.controller('InitApiCtrl', function($log, $scope, $http, $timeout) {
+.controller('InitApiCtrl', function($log, $scope) {
   $log.debug('InitApiCtrl started');
   $scope.running = false;
   $scope.apiResponse = '';
-
-  $timeout(function() {
-    try {
-      prettyPrint();
-    } catch (error) {
-      $log.error('failed ', error);
-    }
-  }, 500);
 
   $scope.runCode = function() {
     $scope.running = true;
